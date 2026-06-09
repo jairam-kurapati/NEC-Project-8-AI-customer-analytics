@@ -433,7 +433,27 @@ def upload():
     file = request.files["file"]
 
     if file:
-        df = pd.read_csv(file)
+
+        temp_df = pd.read_csv(file)
+
+        required_columns = [
+            "CustomerID",
+            "Age",
+            "AnnualIncome",
+            "SpendingScore",
+            "PurchaseFrequency",
+            "TotalSpent",
+            "Purchase",
+            "Churn"
+        ]
+
+        if all(col in temp_df.columns for col in required_columns):
+
+            df = temp_df
+
+        else:
+
+            return "Invalid CSV Format"
 
     return dashboard()
 @app.route("/customer/<int:customer_id>")
