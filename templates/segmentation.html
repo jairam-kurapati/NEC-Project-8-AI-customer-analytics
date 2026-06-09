@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Customer Segmentation</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+
+</head>
+
+<body>
+
+<!-- Sidebar -->
+
+<div class="sidebar">
+
+    <h2>AI Analytics</h2>
+
+    <a href="/">📊 Dashboard</a>
+
+    <a href="/prediction">
+        🤖 Prediction
+    </a>
+
+    <a href="/segmentation">
+        👥 Segmentation
+    </a>
+
+    <a href="/recommendation">
+        🎯 Recommendation
+    </a>
+
+</div>
+
+<!-- Main Content -->
+
+<div class="main-content">
+
+    <h1>Customer Segmentation Analysis</h1>
+
+    <div class="insights">
+
+        <h2>AI Segment Insights</h2>
+
+        <ul>
+            <li>Customers are automatically grouped using K-Means Clustering.</li>
+            <li>Each segment represents similar purchasing behavior.</li>
+            <li>Businesses can target each segment with personalized campaigns.</li>
+            <li>Premium customers generate the highest revenue.</li>
+        </ul>
+
+    </div>
+
+    <div class="cards">
+
+        {% for segment in segment_data %}
+
+        <div class="card">
+
+            <h3>{{ segment.name }}</h3>
+
+            <p>{{ segment.count }} Customers</p>
+
+            <hr style="margin:15px 0">
+
+            {% if segment.id == 0 %}
+            <p>High Income + High Spending</p>
+
+            {% elif segment.id == 1 %}
+            <p>Frequent & Loyal Buyers</p>
+
+            {% elif segment.id == 2 %}
+            <p>Budget Conscious Customers</p>
+
+            {% else %}
+            <p>Recently Acquired Customers</p>
+
+            {% endif %}
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+    <div class="chart-container">
+
+        <h2>Customer Segment Distribution</h2>
+
+        <canvas id="segmentPieChart"></canvas>
+
+    </div>
+
+    <div class="chart-container">
+
+        <h2>Customer Cluster Visualization</h2>
+
+        <div id="cluster-chart"></div>
+
+    </div>
+
+</div>
+
+<script>
+
+const labels = {{ cluster_labels | tojson }};
+
+const values = {{ cluster_values | tojson }};
+
+new Chart(
+    document.getElementById("segmentPieChart"),
+    {
+        type: "pie",
+
+        data: {
+
+            labels: labels,
+
+            datasets: [{
+
+                data: values
+
+            }]
+        }
+    }
+);
+
+const clusterGraph = JSON.parse(
+    `{{ cluster_graph | safe }}`
+);
+
+Plotly.newPlot(
+    "cluster-chart",
+    clusterGraph.data,
+    clusterGraph.layout
+);
+
+</script>
+
+</body>
+
+</html>
+
+

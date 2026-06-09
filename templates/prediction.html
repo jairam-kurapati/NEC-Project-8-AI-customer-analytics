@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Customer Prediction</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+
+<!-- Sidebar -->
+
+<div class="sidebar">
+
+    <h2>AI Analytics</h2>
+
+    <a href="/">📊 Dashboard</a>
+
+    <a href="/prediction">
+        🤖 Prediction
+    </a>
+
+    <a href="/segmentation">
+        👥 Segmentation
+    </a>
+
+    <a href="/recommendation">
+        🎯 Recommendation
+    </a>
+
+</div>
+
+<!-- Main Content -->
+
+<div class="main-content">
+
+    <h1>Customer Prediction</h1>
+
+    <form action="/predict" method="POST">
+
+        <input
+            type="number"
+            name="age"
+            placeholder="Age"
+            required>
+
+        <input
+            type="number"
+            name="income"
+            placeholder="Annual Income"
+            required>
+
+        <input
+            type="number"
+            name="score"
+            placeholder="Spending Score"
+            required>
+
+        <input
+            type="number"
+            name="frequency"
+            placeholder="Purchase Frequency"
+            required>
+
+        <input
+            type="number"
+            name="spent"
+            placeholder="Total Spent"
+            required>
+
+        <button type="submit">
+            Predict Customer
+        </button>
+
+    </form>
+
+    {% if purchase_result %}
+
+    <div class="result">
+
+        <h2>Prediction Results</h2>
+
+        <p>
+            <strong>Purchase Prediction:</strong>
+            {{ purchase_result }}
+        </p>
+
+        <p>
+            <strong>Churn Prediction:</strong>
+            {{ churn_result }}
+        </p>
+
+    </div>
+
+    {% endif %}
+
+</div>
+
+</body>
+</html>

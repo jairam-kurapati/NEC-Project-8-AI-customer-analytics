@@ -1,0 +1,326 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',sans-serif;
+}
+
+body{
+    background:#f4f7fc;
+    color:#1e293b;
+}
+
+.navbar{
+    background:#2563eb;
+    color:white;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:15px 40px;
+    box-shadow:0 2px 10px rgba(0,0,0,.1);
+}
+
+.navbar h2{
+    font-size:24px;
+}
+
+.navbar a{
+    color:white;
+    text-decoration:none;
+    margin-left:20px;
+    font-weight:600;
+}
+
+.navbar a:hover{
+    color:#dbeafe;
+}
+
+.container{
+    width:90%;
+    max-width:1200px;
+    margin:40px auto;
+}
+
+h1{
+    text-align:center;
+    margin-bottom:30px;
+    color:#1e293b;
+}
+
+.cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:20px;
+}
+
+.card{
+    background:white;
+    padding:25px;
+    border-radius:15px;
+    box-shadow:0 5px 15px rgba(0,0,0,.1);
+    transition:all .3s ease;
+}
+
+.card:hover{
+    transform:translateY(-8px);
+    box-shadow:0 10px 25px rgba(0,0,0,.15);
+}
+
+.card h3{
+    color:#2563eb;
+    margin-bottom:10px;
+}
+
+.card p{
+    font-size:20px;
+    font-weight:bold;
+}
+
+.insights{
+    background:white;
+    margin-top:30px;
+    padding:25px;
+    border-radius:15px;
+    box-shadow:0 5px 15px rgba(0,0,0,.1);
+}
+
+.insights h2{
+    color:#2563eb;
+    margin-bottom:15px;
+}
+
+.insights li{
+    margin-bottom:10px;
+}
+
+form{
+    background:white;
+    padding:30px;
+    border-radius:15px;
+    box-shadow:0 5px 15px rgba(0,0,0,.1);
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+}
+
+input{
+    padding:12px;
+    border:1px solid #ddd;
+    border-radius:8px;
+    font-size:16px;
+}
+
+button{
+    padding:12px;
+    border:none;
+    border-radius:8px;
+    background:#2563eb;
+    color:white;
+    cursor:pointer;
+    font-size:16px;
+}
+
+button:hover{
+    background:#1d4ed8;
+}
+
+.result{
+    margin-top:25px;
+    background:#e0f2fe;
+    padding:20px;
+    border-radius:10px;
+    border-left:5px solid #2563eb;
+}
+
+.result h2{
+    margin-bottom:10px;
+}
+
+.result p{
+    margin-bottom:10px;
+}
+
+/* Chart Container */
+
+.chart-container{
+    background:white;
+    margin-top:30px;
+    padding:25px;
+    border-radius:15px;
+    box-shadow:0 5px 15px rgba(0,0,0,.1);
+}
+
+.chart-container h2{
+    text-align:center;
+    color:#2563eb;
+    margin-bottom:20px;
+}
+
+canvas{
+    max-width:600px;
+    margin:auto;
+    display:block;
+}
+
+/* Plotly Charts */
+
+#age-chart,
+#scatter-chart{
+    width:100%;
+    min-height:500px;
+}
+
+/* Dark Mode Ready */
+
+.dark-mode{
+    background:#0f172a;
+    color:white;
+}
+
+.dark-mode .card,
+.dark-mode .insights,
+.dark-mode .chart-container,
+.dark-mode form{
+    background:#1e293b;
+    color:white;
+}
+
+.dark-mode h1,
+.dark-mode h2{
+    color:white;
+}
+
+/* Responsive */
+
+@media(max-width:768px){
+
+    .navbar{
+        flex-direction:column;
+        gap:10px;
+    }
+
+    .navbar a{
+        margin:0 10px;
+    }
+
+    .cards{
+        grid-template-columns:1fr;
+    }
+
+}
+.upload-section{
+    background:white;
+    margin-top:30px;
+    padding:25px;
+    border-radius:15px;
+    box-shadow:0 5px 15px rgba(0,0,0,.1);
+}
+
+.upload-section h2{
+    color:#2563eb;
+    margin-bottom:15px;
+}
+.dark-mode{
+    background:#0f172a;
+    color:white;
+}
+
+.dark-mode .navbar{
+    background:#020617;
+}
+
+.dark-mode .card,
+.dark-mode .insights,
+.dark-mode .chart-container,
+.dark-mode form{
+    background:#1e293b;
+    color:white;
+}
+
+.dark-mode .card h3{
+    color:#60a5fa;
+}
+
+.dark-mode input{
+    background:#334155;
+    color:white;
+    border:none;
+}
+#cluster-chart{
+    width:100%;
+    min-height:600px;
+}
+/* =========================
+   ADMIN SIDEBAR
+========================= */
+
+.sidebar{
+
+    position:fixed;
+
+    left:0;
+    top:0;
+
+    width:250px;
+    height:100vh;
+
+    background:#1e293b;
+
+    padding:20px;
+
+    overflow-y:auto;
+}
+
+.sidebar h2{
+
+    color:white;
+
+    text-align:center;
+
+    margin-bottom:30px;
+}
+
+.sidebar a{
+
+    display:block;
+
+    color:white;
+
+    text-decoration:none;
+
+    padding:14px;
+
+    margin-bottom:10px;
+
+    border-radius:10px;
+
+    transition:.3s;
+}
+
+.sidebar a:hover{
+
+    background:#334155;
+}
+
+.main-content{
+
+    margin-left:270px;
+
+    padding:30px;
+}
+
+@media(max-width:768px){
+
+    .sidebar{
+
+        width:100%;
+        height:auto;
+        position:relative;
+    }
+
+    .main-content{
+
+        margin-left:0;
+    }
+
+}

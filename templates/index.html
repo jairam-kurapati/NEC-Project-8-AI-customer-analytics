@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AI Customer Analytics</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<div class="container">
+
+    <h1>AI Customer Analytics Dashboard</h1>
+
+    <form action="/predict" method="POST">
+
+        <input type="number" name="age" placeholder="Age" required>
+
+        <input type="number" name="income" placeholder="Annual Income" required>
+
+        <input type="number" name="score" placeholder="Spending Score" required>
+
+        <input type="number" name="frequency" placeholder="Purchase Frequency" required>
+
+        <input type="number" name="spent" placeholder="Total Spent" required>
+
+        <button type="submit">Analyze Customer</button>
+
+    </form>
+
+    {% if purchase_result %}
+    <div class="result">
+        <h3>Purchase Prediction</h3>
+        <p>{{ purchase_result }}</p>
+
+        <h3>Churn Prediction</h3>
+        <p>{{ churn_result }}</p>
+    </div>
+    {% endif %}
+
+</div>
+
+</body>
+</html>

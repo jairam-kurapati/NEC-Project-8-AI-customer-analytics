@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>Customer Details</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static',
+          filename='css/style.css') }}">
+
+</head>
+<body>
+
+<div class="container">
+
+    <h1>Customer Details</h1>
+
+    <div class="card">
+
+        <p><strong>ID:</strong>
+        {{ customer.CustomerID }}</p>
+
+        <p><strong>Age:</strong>
+        {{ customer.Age }}</p>
+
+        <p><strong>Income:</strong>
+        ₹{{ customer.AnnualIncome }}</p>
+
+        <p><strong>Spending Score:</strong>
+        {{ customer.SpendingScore }}</p>
+
+        <p><strong>Purchase Frequency:</strong>
+        {{ customer.PurchaseFrequency }}</p>
+
+        <p><strong>Total Spent:</strong>
+        ₹{{ customer.TotalSpent }}</p>
+
+        <p><strong>Purchase:</strong>
+        {{ customer.Purchase }}</p>
+
+        <p><strong>Churn:</strong>
+        {{ customer.Churn }}</p>
+
+    </div>
+
+</div>
+
+</body>
+</html>

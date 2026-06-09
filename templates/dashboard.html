@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AI Customer Analytics Dashboard</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+    <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+</head>
+
+<body>
+
+<nav class="navbar">
+
+    <h2>AI Customer Analytics</h2>
+
+    <div>
+        <a href="/">Dashboard</a>
+        <a href="/prediction">Prediction</a>
+        <a href="/segmentation">Segmentation</a>
+        <a href="/recommendation">Recommendation</a>
+
+        <button id="theme-toggle">
+            🌙 Dark Mode
+        </button>
+    </div>
+
+</nav>
+
+<div class="container">
+
+    <h1>Customer Analytics Dashboard</h1>
+
+    <!-- KPI Cards -->
+
+    <div class="cards">
+
+        <div class="card">
+            <h3>Total Customers</h3>
+            <p>{{ total_customers }}</p>
+        </div>
+
+        <div class="card">
+            <h3>Average Income</h3>
+            <p>₹{{ avg_income }}</p>
+        </div>
+
+        <div class="card">
+            <h3>Average Spending Score</h3>
+            <p>{{ avg_spending }}</p>
+        </div>
+
+        <div class="card">
+            <h3>Purchase Rate</h3>
+            <p>{{ purchase_rate }}%</p>
+        </div>
+
+        <div class="card">
+            <h3>Churn Rate</h3>
+            <p>{{ churn_rate }}%</p>
+        </div>
+
+    </div>
+
+    <!-- Customer Lookup -->
+
+    <div class="card" style="margin-top:30px;">
+
+        <h3>Customer Lookup</h3>
+
+        <form id="lookupForm">
+
+            <input
+                type="number"
+                id="customerId"
+                placeholder="Enter Customer ID"
+                required>
+
+            <button
+                type="button"
+                onclick="openCustomer()">
+
+                View Customer
+
+            </button>
+
+        </form>
+
+    </div>
+
+    <!-- Upload CSV -->
+
+    <div class="upload-section">
+
+        <h2>Upload Customer Dataset</h2>
+
+        <form action="/upload"
+              method="POST"
+              enctype="multipart/form-data">
+
+            <input
+                type="file"
+                name="file"
+                accept=".csv"
+                required>
+
+            <button type="submit">
+                Upload CSV
+            </button>
+
+        </form>
+
+    </div>
+
+    <!-- AI Insights -->
+
+    <div class="insights">
+
+        <h2>AI Business Insights</h2>
+
+        <ul>
+
+            {% for insight in insights %}
+
+            <li>{{ insight }}</li>
+
+            {% endfor %}
+
+        </ul>
+
+    </div>
+
+    <!-- PDF Report -->
+
+    <div style="text-align:center; margin-top:20px;">
+
+        <a href="/download_report">
+
+            <button>
+                Download Analytics Report
+            </button>
+
+        </a>
+
+    </div>
+
+    <!-- Age Chart -->
+
+    <div class="chart-container">
+
+        <h2>Customer Age Distribution</h2>
+
+        <div id="age-chart"></div>
+
+    </div>
+
+    <!-- Income Chart -->
+
+    <div class="chart-container">
+
+        <h2>Income vs Spending Score</h2>
+
+        <div id="scatter-chart"></div>
+
+    </div>
+
+</div>
+
+<script>
+
+function openCustomer(){
+
+    let id = document.getElementById(
+        "customerId"
+    ).value;
+
+    if(id){
+
+        window.location.href =
+        "/customer/" + id;
+
+    }
+
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+
+    try {
+
+        const ageGraph = JSON.parse(
+            `{{ age_graph | safe }}`
+        );
+
+        Plotly.newPlot(
+            "age-chart",
+            ageGraph.data,
+            ageGraph.layout
+        );
+
+        const scatterGraph = JSON.parse(
+            `{{ scatter_graph | safe }}`
+        );
+
+        Plotly.newPlot(
+            "scatter-chart",
+            scatterGraph.data,
+            scatterGraph.layout
+        );
+
+    }
+    catch(error){
+
+        console.error(
+            "Plotly Error:",
+            error
+        );
+
+    }
+
+});
+
+</script>
+
+<script src="{{ url_for('static', filename='js/theme.js') }}"></script>
+
+</body>
+
+</html>
